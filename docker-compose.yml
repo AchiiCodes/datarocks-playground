@@ -51,8 +51,23 @@ services:
     ports:
       - "54320:5432"
     environment:
+      POSTGRES_DB: keycloak
       POSTGRES_USER: user
       POSTGRES_PASSWORD: admin
+  keycloak:
+    depends_on:
+      - postgres
+    container_name: keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: user
+      DB_PASSWORD: admin
+    image: jboss/keycloak:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4:latest
