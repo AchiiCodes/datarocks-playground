@@ -44,7 +44,7 @@ services:
     ports:
       - "3000:3000"
 
-  db:
+  postgres:
     image: postgres:latest
     container_name: postgres
     restart: always
